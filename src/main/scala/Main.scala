@@ -78,9 +78,22 @@ object Main extends App {
   }
 
 
+  def delete(id: Int) = {
+    val queryFuture = Future {
+      db.run(peopleTable.filter(_.id === id).delete)
+    }
+    Await.result(queryFuture, Duration.Inf).andThen {
+      case Success(_) => None
+      case Failure(error) =>
+        println("Listing people failed due to: " + error.getMessage)
+    }
+  }
+
+
   dropDB
   Thread.sleep(10000)
 
 
 }
+
 
