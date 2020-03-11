@@ -85,7 +85,7 @@ object Main extends App {
     Await.result(queryFuture, Duration.Inf).andThen {
       case Success(_) => None
       case Failure(error) =>
-        println("Listing people failed due to: " + error.getMessage)
+        println("problem deleting: " + error.getMessage)
     }
   }
 
